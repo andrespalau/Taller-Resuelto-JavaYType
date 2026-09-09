@@ -1,7 +1,7 @@
 /**
  * TODO: EJERCICIO 1 - Calculadora Básica
  */
-
+/**
 const readline = require("node:readline/promises");
 const { stdin: input, stdout: output } = require("node:process");
 
@@ -52,63 +52,161 @@ async function iniciar() {
 }
 
 iniciar();
+ */
 
-/**
+/** 
  * TODO: EJERCICIO 2 - Tabla de Multiplicar
- * Crea una función llamada tablaMultiplicar.
- * Debe recibir 2 numeros:
- *  - El primero es el numero de la tabla de multiplicar
- *  - El segundo es la cantidad de operaciones a realizar
- * Debe imprimir la tabla de multiplicar solicitada
- * Ejemplo: 2 y 15 -> Tabla de Multiplicar del 2 al 15
+ */
+/**
+const readline = require("node:readline/promises");
+const { stdin: input, stdout: output } = require("node:process");
+
+function tablaMultiplicar(numero, cantidad) {
+    console.log(`\nTabla de Multiplicar del ${numero} al ${cantidad}`);
+
+    for (let i = 1; i <= cantidad; i++) {
+        console.log(`${numero} x ${i} = ${numero * i}`);
+    }
+}
+
+async function iniciarTabla() {
+    const rl = readline.createInterface({ input, output });
+
+    const numero = Number(
+        await rl.question("Ingrese el número de la tabla: ")
+    );
+
+    const cantidad = Number(
+        await rl.question("Ingrese la cantidad de operaciones: ")
+    );
+
+    tablaMultiplicar(numero, cantidad);
+
+    rl.close();
+}
+
+iniciarTabla();
  */
 
 /**
  * TODO: EJERCICIO 3 - Gestión de Producto
- * Tienes el siguiente arreglo.
- * Realiza las siguientes operaciones:
- *  - Agregar "Monitor"
- *  - Agregar "Audífonos" al inicio
- *  - Eliminar el último elemento
- *  - Mostrar el arreglo final
  */
+/** 
+const readline = require("node:readline/promises");
+const { stdin: input, stdout: output } = require("node:process");
 
-const productos = ["Laptop", "Mouse", "Teclado"];
+async function gestionProductos() {
+    const rl = readline.createInterface({ input, output });
+
+    const producto1 = await rl.question("Ingrese el primer producto: ");
+    const producto2 = await rl.question("Ingrese el segundo producto: ");
+    const producto3 = await rl.question("Ingrese el tercer producto: ");
+
+    const productos = [producto1, producto2, producto3];
+
+    productos.push("Monitor");
+
+    productos.unshift("Audífonos");
+
+    productos.pop();
+
+    console.log("\nArreglo final:");
+    console.log(productos);
+
+    rl.close();
+}
+
+gestionProductos();
+*/
 
 /**
  * TODO: EJERCICIO 4 - Inventario de Estudiantes
- * Crea un objeto llamado estudiante. Debe contener:
- *  - nombre
- *  - edad
- *  - carrera
- *  - materias (array)
- * Posteriormente:
- *  - Cambia la edad.
- *  - Agrega una nueva materia.
- *  - Muestra todas las propiedades utilizando Object.entries() (Investigar).
  */
-const estudiante = {
-    nombre: "Laura",
-    edad: 20,
-    carrera: "Ingeniería",
-    materias: [
-        "Matemáticas",
-        "Programación"
-    ]
-};
+/** 
+const readline = require("node:readline/promises");
+const { stdin: input, stdout: output } = require("node:process");
+
+async function inventarioEstudiante() {
+    const rl = readline.createInterface({ input, output });
+
+    const nombre = await rl.question("Ingrese el nombre del estudiante: ");
+    const edad = Number(await rl.question("Ingrese la edad: "));
+    const carrera = await rl.question("Ingrese la carrera: ");
+
+    const materia1 = await rl.question("Ingrese la primera materia: ");
+    const materia2 = await rl.question("Ingrese la segunda materia: ");
+
+    const estudiante = {
+        nombre: nombre,
+        edad: edad,
+        carrera: carrera,
+        materias: [materia1, materia2]
+    };
+
+    estudiante.edad = Number(
+        await rl.question("Ingrese la nueva edad: ")
+    );
+
+    const nuevaMateria = await rl.question(
+        "Ingrese una nueva materia: "
+    );
+
+    estudiante.materias.push(nuevaMateria);
+
+    console.log("\nDatos finales del estudiante:");
+
+    Object.entries(estudiante).forEach(([propiedad, valor]) => {
+        console.log(`${propiedad}:`, valor);
+    });
+
+    rl.close();
+}
+
+inventarioEstudiante();
+*/
 
 /**
  * TODO: EJERCICIO 5 - Filtrar Empleados
- * Dado el siguiente arreglo:
- * Obtén un nuevo arreglo que contenga únicamente los empleados 
- * cuyo salario sea mayor o igual a 4000.
  */
-const empleados = [
-    { nombre: "Ana", salario: 3000 },
-    { nombre: "Luis", salario: 5000 },
-    { nombre: "Pedro", salario: 2500 },
-    { nombre: "Sara", salario: 7000 }
-];
+/** 
+const readline = require("node:readline/promises");
+const { stdin: input, stdout: output } = require("node:process");
+
+async function filtrarEmpleados() {
+    const rl = readline.createInterface({ input, output });
+
+    const cantidad = Number(
+        await rl.question("¿Cuántos empleados desea ingresar?: ")
+    );
+
+    const empleados = [];
+
+    for (let i = 0; i < cantidad; i++) {
+        console.log(`\nEmpleado ${i + 1}`);
+
+        const nombre = await rl.question("Ingrese el nombre: ");
+        const salario = Number(
+            await rl.question("Ingrese el salario: ")
+        );
+
+        empleados.push({
+            nombre: nombre,
+            salario: salario
+        });
+    }
+
+    const empleadosFiltrados = empleados.filter(
+        empleado => empleado.salario >= 4000
+    );
+
+    console.log("\nEmpleados con salario mayor o igual a 4000:");
+    console.log(empleadosFiltrados);
+
+    rl.close();
+}
+
+filtrarEmpleados();
+*/
 
 /**
  * TODO: EJERCICIO 6 - Estadísticas de Ventas
