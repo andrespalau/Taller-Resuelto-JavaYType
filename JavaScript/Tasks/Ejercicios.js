@@ -1,11 +1,57 @@
 /**
  * TODO: EJERCICIO 1 - Calculadora Básica
- * Crea una función llamada calculadora que reciba dos números y un operador (+, -, *, /).
- * La función debe retornar el resultado de la operación
- * Debe imprimir un ejemplo con cada operador
- * Tener en cuenta la division por 0
- * Ejemplo: calculadora(10, 5, "+"); -> Resultado esperado: 15 
  */
+
+const readline = require("node:readline/promises");
+const { stdin: input, stdout: output } = require("node:process");
+
+function calculadora(numero1, numero2, operador) {
+    switch (operador) {
+        case "+":
+            return numero1 + numero2;
+
+        case "-":
+            return numero1 - numero2;
+
+        case "*":
+            return numero1 * numero2;
+
+        case "/":
+            if (numero2 === 0) {
+                return "No se puede dividir entre 0";
+            }
+            return numero1 / numero2;
+
+        default:
+            return "Operador no válido";
+    }
+}
+
+async function iniciar() {
+    const rl = readline.createInterface({ input, output });
+
+    const numero1 = Number(
+        await rl.question("Ingrese el primer número: ")
+    );
+
+    const numero2 = Number(
+        await rl.question("Ingrese el segundo número: ")
+    );
+
+    const operador = await rl.question(
+        "Ingrese la operación (+, -, *, /): "
+    );
+
+    const resultado = calculadora(numero1, numero2, operador);
+
+    console.log(
+        `calculadora(${numero1}, ${numero2}, "${operador}"); -> Resultado esperado: ${resultado}`
+    );
+
+    rl.close();
+}
+
+iniciar();
 
 /**
  * TODO: EJERCICIO 2 - Tabla de Multiplicar
@@ -176,5 +222,3 @@ const estudiantes2 = [
     }
 
 ];
-
-console.log("JavaScript funciona correctamente");
