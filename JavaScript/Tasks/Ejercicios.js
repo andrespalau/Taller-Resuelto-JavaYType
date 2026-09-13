@@ -121,7 +121,7 @@ gestionProductos();
 /**
  * TODO: EJERCICIO 4 - Inventario de Estudiantes
  */
- 
+
 const readline = require("node:readline/promises");
 const { stdin: input, stdout: output } = require("node:process");
 
@@ -308,7 +308,6 @@ console.log("Después de usar =");
 console.log("Usuario original:", usuario);
 console.log("Copia con =:", copiaReferencia);
 
-// Copia utilizando Spread
 const copiaSpread = { ...usuario };
 
 copiaSpread.nombre = "Laura";
