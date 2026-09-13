@@ -1,7 +1,7 @@
 /**
  * TODO: EJERCICIO 1 - Calculadora Básica
  */
-/**
+
 const readline = require("node:readline/promises");
 const { stdin: input, stdout: output } = require("node:process");
 
@@ -52,12 +52,11 @@ async function iniciar() {
 }
 
 iniciar();
- */
 
 /** 
  * TODO: EJERCICIO 2 - Tabla de Multiplicar
  */
-/**
+
 const readline = require("node:readline/promises");
 const { stdin: input, stdout: output } = require("node:process");
 
@@ -86,12 +85,12 @@ async function iniciarTabla() {
 }
 
 iniciarTabla();
- */
+
 
 /**
  * TODO: EJERCICIO 3 - Gestión de Producto
  */
-/** 
+
 const readline = require("node:readline/promises");
 const { stdin: input, stdout: output } = require("node:process");
 
@@ -117,12 +116,12 @@ async function gestionProductos() {
 }
 
 gestionProductos();
-*/
+
 
 /**
  * TODO: EJERCICIO 4 - Inventario de Estudiantes
  */
-/** 
+ 
 const readline = require("node:readline/promises");
 const { stdin: input, stdout: output } = require("node:process");
 
@@ -163,12 +162,12 @@ async function inventarioEstudiante() {
 }
 
 inventarioEstudiante();
-*/
+
 
 /**
  * TODO: EJERCICIO 5 - Filtrar Empleados
  */
-/** 
+
 const readline = require("node:readline/promises");
 const { stdin: input, stdout: output } = require("node:process");
 
@@ -206,25 +205,53 @@ async function filtrarEmpleados() {
 }
 
 filtrarEmpleados();
-*/
+
 
 /**
  * TODO: EJERCICIO 6 - Estadísticas de Ventas
- * Dado el siguiente arreglo:
- * Calcular:
- *  - Total vendido.
- *  - Venta más alta (Math.max investigar).
- *  - Promedio de ventas.
- */
-const ventas = [250, 400, 150, 600, 800];
+*/
+
+    const readline = require("node:readline/promises");
+const { stdin: input, stdout: output } = require("node:process");
+
+async function estadisticasVentas() {
+    const rl = readline.createInterface({ input, output });
+
+    const cantidad = Number(
+        await rl.question("¿Cuántas ventas desea ingresar?: ")
+    );
+
+    const ventas = [];
+
+    for (let i = 0; i < cantidad; i++) {
+        const venta = Number(
+            await rl.question(`Ingrese el valor de la venta ${i + 1}: `)
+        );
+
+        ventas.push(venta);
+    }
+
+    const totalVendido = ventas.reduce(
+        (total, venta) => total + venta,
+        0
+    );
+
+    const ventaMasAlta = Math.max(...ventas);
+
+    const promedioVentas = totalVendido / ventas.length;
+
+    console.log("\nEstadísticas de Ventas");
+    console.log(`Total vendido: ${totalVendido}`);
+    console.log(`Venta más alta: ${ventaMasAlta}`);
+    console.log(`Promedio de ventas: ${promedioVentas}`);
+
+    rl.close();
+}
+
+estadisticasVentas();
 
 /**
  * TODO: EJERCICIO 7 - Catálogo de Libros
- * Dado el siguiente arreglo:
- * Realiza las siguientes operaciones:
- *  - Encontrar el libro con id 2.
- *  - Obtener solo los libros disponibles.
- *  - Crear un arreglo únicamente con los títulos.
  */
 
 const libros = [
@@ -245,31 +272,54 @@ const libros = [
     }
 ];
 
+
+const libroId2 = libros.find(libro => libro.id === 2);
+
+
+const librosDisponibles = libros.filter(libro => libro.disponible === true);
+
+
+const titulos = libros.map(libro => libro.titulo);
+
+console.log("Libro con id 2:");
+console.log(libroId2);
+
+console.log("\nLibros disponibles:");
+console.log(librosDisponibles);
+
+console.log("\nTítulos:");
+console.log(titulos);
+
 /**
  * TODO: EJERCICIO 8 - Copias y Referencias
- * Dado el siguiente objeto:
- * Realiza lo siguiente:
- *  - Crea una copia del usuario utilizando asignación (=).
- *  - Modifica el nombre de la copia.
- *  - Observa el resultado de ambos.
- *  - Ahora crea una copia utilizando Spread.
- *  - Modifica nuevamente el nombre.
- *  - Observa el resultado de ambos.
- *  - Explica la diferencia entre ambos casos.
- */
+*/
 
 const usuario = {
     nombre: "Carlos",
     edad: 30
 };
 
+
+const copiaReferencia = usuario;
+
+copiaReferencia.nombre = "Andrés";
+
+console.log("Después de usar =");
+console.log("Usuario original:", usuario);
+console.log("Copia con =:", copiaReferencia);
+
+// Copia utilizando Spread
+const copiaSpread = { ...usuario };
+
+copiaSpread.nombre = "Laura";
+
+console.log("\nDespués de usar Spread");
+console.log("Usuario original:", usuario);
+console.log("Copia con Spread:", copiaSpread);
+
+
 /**
  * TODO: EJERCICIO 9 - Desestructuración
- * Dado el siguiente objeto:
- * Realiza las siguientes tareas:
- *  - Extrae las propiedades marca y ram.
- *  - Renombra almacenamiento como ssd.
- *  - Asigna un valor por defecto a una propiedad llamada tarjetaGrafica.
  */
 
 const computador = {
@@ -279,18 +329,20 @@ const computador = {
     almacenamiento: 512
 };
 
+const {
+    marca,
+    ram,
+    almacenamiento: ssd,
+    tarjetaGrafica = "No especificada"
+} = computador;
+
+console.log("Marca:", marca);
+console.log("RAM:", ram);
+console.log("SSD:", ssd);
+console.log("Tarjeta gráfica:", tarjetaGrafica);
+
 /**
  * TODO: EJERCICIO 10 - Sistema de Gestión de Estudiantes
- * Dado el siguiente arreglo:
- * Desarrolla un programa que permita:
- *  - Mostrar únicamente los estudiantes aprobados (nota mayor o igual a 3.0).
- *  - Mostrar únicamente los mayores de edad.
- *  - Obtener un arreglo únicamente con los nombres.
- *  - Buscar al estudiante con id 3.
- *  - Calcular el promedio de todas las notas.
- *  - Encontrar el estudiante con la nota más alta.
- *  - Crear un nuevo arreglo agregando la propiedad estado, cuyo valor será "Aprobó" o "Reprobó" según la nota.
- *  - Realizar una copia del arreglo utilizando el operador Spread.
  */
 
 const estudiantes2 = [
@@ -318,5 +370,63 @@ const estudiantes2 = [
         nota: 2.9,
         edad: 19
     }
-
 ];
+
+const aprobados = estudiantes2.filter(
+    estudiante => estudiante.nota >= 3.0
+);
+
+const mayoresEdad = estudiantes2.filter(
+    estudiante => estudiante.edad >= 18
+);
+
+const nombres = estudiantes2.map(
+    estudiante => estudiante.nombre
+);
+
+const estudianteId3 = estudiantes2.find(
+    estudiante => estudiante.id === 3
+);
+
+const sumaNotas = estudiantes2.reduce(
+    (total, estudiante) => total + estudiante.nota,
+    0
+);
+
+const promedio = sumaNotas / estudiantes2.length;
+
+const mejorEstudiante = estudiantes2.reduce(
+    (mayor, estudiante) =>
+        estudiante.nota > mayor.nota ? estudiante : mayor
+);
+
+const estudiantesConEstado = estudiantes2.map(estudiante => ({
+    ...estudiante,
+    estado: estudiante.nota >= 3.0 ? "Aprobó" : "Reprobó"
+}));
+
+const copiaEstudiantes = [...estudiantes2];
+
+console.log("Estudiantes aprobados:");
+console.log(aprobados);
+
+console.log("\nEstudiantes mayores de edad:");
+console.log(mayoresEdad);
+
+console.log("\nNombres de los estudiantes:");
+console.log(nombres);
+
+console.log("\nEstudiante con ID 3:");
+console.log(estudianteId3);
+
+console.log("\nPromedio de notas:");
+console.log(promedio.toFixed(2));
+
+console.log("\nEstudiante con la nota más alta:");
+console.log(mejorEstudiante);
+
+console.log("\nEstudiantes con estado:");
+console.log(estudiantesConEstado);
+
+console.log("\nCopia del arreglo con Spread:");
+console.log(copiaEstudiantes);
